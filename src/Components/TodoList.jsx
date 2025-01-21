@@ -15,11 +15,11 @@ const TodoList = () => {
   };
 
   const handleAddList = (index) => {
-    if (listInputs[index] && listInputs[index].trim() !== '') {
-      const newTodos = [...todos];
-      newTodos[index].lists.push(listInputs[index]);
-      setTodos(newTodos);
-      setListInputs({...listInputs, [index]: ''});
+    if (listInputs[index] && listInputs[index].trim() !== '') { // check if the input is not empty
+      const newTodos = [...todos]; // copy the todos array
+      newTodos[index].lists.push(listInputs[index]); // access todo at position of index and add the new input (listInputs[index]) to the todo's 'lists' array
+      setTodos(newTodos); // Call the state setter to update the todos with our modified copy (newTodos). This triggers React to re-render with the updated data.
+      setListInputs({...listInputs, [index]: ''}); // We spread the old listInputs object into a new one and set the value for [index] to an empty string. This clears the input field after adding the list.
     }
   };
 
@@ -28,8 +28,11 @@ const TodoList = () => {
   };
 
   const handleDeleteTodo = (index) => {
-    const newTodos = 
-  }
+    const newTodos = [...todos];
+    newTodos.splice(index, 1);
+    setTodos(newTodos);
+  };
+
   return (
     <>
       <div className="todo-container">
@@ -46,7 +49,7 @@ const TodoList = () => {
         </div>
       </div>
       <div className="todo_main">
-          {todos.map((todo, index) => (
+          {todos.map((todo, index) => ( // iterate over the todos array and idetify each todo with an index
             <div key={index} className='todo-card'>
               <div className='heading_dodo'>
               <h3>{todo.heading}</h3> {/* Display the heading here */}
